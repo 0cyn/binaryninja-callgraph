@@ -6,7 +6,7 @@
 #define YACP_CALLGRAPHGENERATOR_H
 
 #include "binaryninjaapi.h"
-#include "binja/ui/progresstask.h"
+#include "binaryninja-api/ui/progresstask.h"
 #include <map>
 #include <QString>
 #include <utility>
