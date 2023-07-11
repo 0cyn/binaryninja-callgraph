@@ -10,7 +10,7 @@
 #include <binaryninjaapi.h>
 #ifdef UI_BUILD
 #include "Callgraph.h"
-#include "uitypes.h"
+#include "binaryninja-api/ui/uitypes.h"
 #endif
 
 
