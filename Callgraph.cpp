@@ -3,13 +3,13 @@
 //
 
 #include <binaryninjaapi.h>
-#include <uitypes.h>
+#include "binaryninja-api/ui/uitypes.h"
 #include "CallgraphGenerator.h"
 using namespace BinaryNinja;
 
 #include "Callgraph.h"
-#include "uicontext.h"
-#include "globalarea.h"
+#include "binaryninja-api/ui/uicontext.h"
+#include "binaryninja-api/ui/globalarea.h"
 
 void showCallGraph(BinaryView* view, Function* func, const string& title, CallGraphSettings settings)
 {

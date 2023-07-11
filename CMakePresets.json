@@ -1,0 +1,16 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "default-release",
+      "displayName": "Default x64 Release",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "description": "Release build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+        "UI_BUILD": "ON"
+      }
+    }
+  ]
+}

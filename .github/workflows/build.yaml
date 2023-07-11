@@ -1,0 +1,48 @@
+name: Build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CONFIGURE_PRESET: "default-release"
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}-latest
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+        version: [ v3.4.4271-stable, dev ]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'true'
+      - uses: seanmiddleditch/gha-setup-ninja@master
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Setup QT
+        run: |
+          cd ~
+          wget https://github.com/cxnder/qt-artifacts/releases/download/6.4.3/${{matrix.os}}.zip
+          unzip ${{matrix.os}}.zip
+      - name: Update submodule
+        run: |
+          cd binaryninjaapi
+          git fetch --tags
+          git checkout --force ${{matrix.version}}
+      - name: Patch api to allow building headlessly
+        run: |
+          cd binaryninjaapi
+          git apply --verbose ../binja.patch
+      - name: Configure CMake
+        run: cmake --preset ${{env.CONFIGURE_PRESET}} -G Ninja
+      - name: Build
+        working-directory: ${{github.workspace}}/out/build
+        run: cmake --build ${{env.CONFIGURE_PRESET}}
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{matrix.os}}-${{matrix.version}}
+          path: ${{github.workspace}}/out/build/${{env.CONFIGURE_PRESET}}/*callgraph*

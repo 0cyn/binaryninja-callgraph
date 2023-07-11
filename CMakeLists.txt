@@ -8,7 +8,13 @@ set(UI_PLUGIN_SOURCE Callgraph.cpp CallgraphGenerator.cpp Callgraph.h CallgraphG
 
 if (UI_BUILD)
     # You may need to replace this with your path
-    set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.1/clang_64/lib/cmake")
+    if(APPLE)
+        set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/clang_64/lib/cmake")
+    elseif(MSVC)
+        # bluh
+    else()
+        set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/gcc_64/lib/cmake")
+    endif()
 endif()
 
 # Non-user-serviceable parts below ---------------------------------------------
@@ -36,7 +42,7 @@ if (UI_BUILD)
     set(CMAKE_AUTOUIC ON)
 
     set(_UI_PLUGIN_SOURCES ${UI_PLUGIN_SOURCE})
-    set(UI_PLUGIN_LIBRARIES binaryninjaui Qt6::Core Qt6::Gui Qt6::Widgets)
+    set(UI_PLUGIN_LIBRARIES Qt6::Core Qt6::Gui Qt6::Widgets)
     set(UI_COMPILE_DEFS UI_BUILD=1)
 
     find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
@@ -55,6 +61,13 @@ add_library(${PLUGIN_NAME} SHARED ${_PLUGIN_SOURCE})
 target_compile_features(${PLUGIN_NAME} PRIVATE cxx_std_20 c_std_99)
 target_compile_definitions(${PLUGIN_NAME} PRIVATE DEV_MODE=${DEV_MODE} ${UI_COMPILE_DEFS})
 
+if(APPLE)
+    target_link_options(${PLUGIN_NAME} PUBLIC -undefined dynamic_lookup)
+elseif(MSVC)
+    target_link_options(${PLUGIN_NAME} PUBLIC "LINKER:/FORCE:UNRESOLVED")
+else()
+    target_link_options(${PLUGIN_NAME} PUBLIC "LINKER:--allow-shlib-undefined")
+endif()
 target_link_libraries(${PLUGIN_NAME} binaryninjaapi ${UI_PLUGIN_LIBRARIES})
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
