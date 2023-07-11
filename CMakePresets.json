@@ -27,7 +27,7 @@
       "displayName": "Default x64 Release",
       "description": "Release x64 build using the default generator",
       "cacheVariables": {
-        "CMAKE_PREFIX_PATH": "/Users/runner/Qt/6.4.3/gcc_64/lib/cmake"
+        "CMAKE_PREFIX_PATH": "/Users/runner/Qt/6.4.3/clang_64/lib/cmake"
       }
     },
     {
@@ -36,7 +36,7 @@
       "displayName": "Default x64 Release",
       "description": "Release x64 build using the default generator",
       "cacheVariables": {
-        "CMAKE_PREFIX_PATH": "/home/runner/Qt/6.4.3/clang_64/lib/cmake"
+        "CMAKE_PREFIX_PATH": "/home/runner/Qt/6.4.3/gcc_64/lib/cmake"
       }
     }
   ]
