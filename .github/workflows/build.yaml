@@ -22,6 +22,9 @@ jobs:
           submodules: 'true'
       - uses: seanmiddleditch/gha-setup-ninja@master
       - uses: ilammy/msvc-dev-cmd@v1
+      - name: optional dependency setup
+        run: |
+          command -v apt-get && apt-get install libgl1-mesa-dev libglvnd-dev
       - name: Setup QT
         run: |
           cd ~
