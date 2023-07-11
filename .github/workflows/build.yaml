@@ -48,9 +48,11 @@ jobs:
           git apply --ignore-whitespace --verbose ../api.patch
       - name: Configure CMake
         run: cmake --preset ${{env.CONFIGURE_PRESET}} -G Ninja
+        shell: bash
       - name: Build
         working-directory: ${{github.workspace}}/out/build
         run: cmake --build ${{env.CONFIGURE_PRESET}}
+        shell: bash
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
