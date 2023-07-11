@@ -277,7 +277,12 @@ Ref<FlowGraph> CallgraphGenerator::GenerateCallgraph(CallGraphSettings settings)
 
             futures.at(index) = std::pair<CallGraphNode*, FlowGraphNode*>(node, graphNode);
             done++;
+
+#if (BN_CURRENT_CORE_ABI_VERSION >= 36)
         }, "Callgraph Generator");
+#else
+        });
+#endif
         index++;
     }
 
