@@ -55,4 +55,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{matrix.os}}-${{matrix.version}}
-          path: ${{github.workspace}}/out/build/${{env.CONFIGURE_PRESET}}/*callgraph*
+          path: ${{github.workspace}}/out/build/${{env.CONFIGURE_PRESET}}-${{matrix.os}}/*callgraph*

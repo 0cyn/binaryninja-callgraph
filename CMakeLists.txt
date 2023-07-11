@@ -6,21 +6,6 @@ set(PLUGIN_NAME binaryninja-callgraph)
 set(PLUGIN_SOURCE Standalone.cpp )
 set(UI_PLUGIN_SOURCE Callgraph.cpp CallgraphGenerator.cpp Callgraph.h CallgraphGenerator.h )
 
-if (UI_BUILD)
-    # You may need to replace this with your path
-    if(NOT DEFINED CMAKE_PREFIX_PATH)
-        if(APPLE)
-            set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/clang_64/lib/cmake")
-        elseif(MSVC) # doesnt work on gh runners
-           set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/msvc2022_64/lib/cmake")
-        else()
-            set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/gcc_64/lib/cmake")
-        endif()
-    endif()
-
-    message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
-endif()
-
 # Non-user-serviceable parts below ---------------------------------------------
 
 if (${CMAKE_HOST_SYSTEM_NAME} MATCHES "Darwin")
@@ -41,6 +26,17 @@ set(UI_COMPILE_DEFS )
 
 if (UI_BUILD)
 
+    if(NOT DEFINED CMAKE_PREFIX_PATH)
+        if(APPLE)
+            set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/clang_64/lib/cmake")
+        elseif(MSVC) # doesnt work on gh runners
+            set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/msvc2022_64/lib/cmake")
+        else()
+            set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/gcc_64/lib/cmake")
+        endif()
+    endif()
+
+        message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
     set(CMAKE_AUTOMOC ON)
     set(CMAKE_AUTORCC ON)
     set(CMAKE_AUTOUIC ON)
