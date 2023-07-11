@@ -15,6 +15,8 @@ if (UI_BUILD)
     else()
         set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/gcc_64/lib/cmake")
     endif()
+
+    message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
 endif()
 
 # Non-user-serviceable parts below ---------------------------------------------
