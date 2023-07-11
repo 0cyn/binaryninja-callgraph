@@ -24,13 +24,13 @@ index 3fe70f98..58eb2946 100644
 +        target_link_options(binaryninjaapi PUBLIC "LINKER:--allow-shlib-undefined")
 +    endif()
 +endif()
-
+ 
  set_target_properties(binaryninjaapi PROPERTIES
      CXX_STANDARD 17
 @@ -36,32 +46,6 @@ set_target_properties(binaryninjaapi PROPERTIES
      POSITION_INDEPENDENT_CODE ON
      ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/out)
-
+ 
 -if(NOT HEADLESS)
 -    if(NOT BN_INTERNAL_BUILD)
 -        # For backwards compatibility, include binaryninjaui in the api module
@@ -57,12 +57,12 @@ index 3fe70f98..58eb2946 100644
 -        # Nothing
 -    endif()
 -endif()
-
+ 
  function(bn_install_plugin target)
      if(NOT BN_INTERNAL_BUILD)
 @@ -71,16 +55,18 @@ function(bn_install_plugin target)
          list(APPEND CMAKE_MODULE_PATH "${BN_API_SOURCE_DIR}/cmake")
-
+ 
          # BinaryNinjaCore has the user plugins dir define that we want
 -        find_package(BinaryNinjaCore REQUIRED)
 -        if(WIN32)
