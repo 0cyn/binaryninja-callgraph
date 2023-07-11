@@ -28,7 +28,7 @@ jobs:
                     sudo apt-get install libgl1-mesa-dev libglvnd-dev
                 elif [ "$RUNNER_OS" == "Windows" ]; then
                     choco install wget
-                    choco install devbox-unzip
+                    choco install unzip
                fi
         shell: bash
       - name: Setup QT
