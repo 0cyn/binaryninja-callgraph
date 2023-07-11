@@ -8,16 +8,14 @@ set(UI_PLUGIN_SOURCE Callgraph.cpp CallgraphGenerator.cpp Callgraph.h CallgraphG
 
 if (UI_BUILD)
     # You may need to replace this with your path
-    if(APPLE)
-        set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/clang_64/lib/cmake")
-    elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-        if (NOT DEFINED WINDOWS_PREFIX_DIR)
-            set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/msvc2022_64/lib/cmake")
+    if(NOT DEFINED CMAKE_PREFIX_PATH)
+        if(APPLE)
+            set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/clang_64/lib/cmake")
+        elseif(MSVC) # doesnt work on gh runners
+           set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/msvc2022_64/lib/cmake")
         else()
-            set(CMAKE_PREFIX_PATH "${WINDOWS_PREFIX_DIR}")
+            set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/gcc_64/lib/cmake")
         endif()
-    else()
-        set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/gcc_64/lib/cmake")
     endif()
 
     message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
