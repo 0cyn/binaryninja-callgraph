@@ -24,7 +24,7 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
       - name: optional dependency setup
         run: |
-          command -v apt-get && sudo apt-get install libgl1-mesa-dev libglvnd-dev
+          command -v apt-get && sudo apt-get install libgl1-mesa-dev libglvnd-dev || true
       - name: Setup QT
         run: |
           cd ~
