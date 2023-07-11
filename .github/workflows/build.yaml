@@ -45,7 +45,7 @@ jobs:
       - name: Patch api to allow building headlessly
         run: |
           cd binaryninja-api
-          git apply --verbose ../api.patch
+          git apply --ignore-whitespace --verbose ../api.patch
       - name: Configure CMake
         run: cmake --preset ${{env.CONFIGURE_PRESET}} -G Ninja
       - name: Build
