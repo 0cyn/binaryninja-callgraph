@@ -34,8 +34,8 @@ jobs:
           git checkout --force ${{matrix.version}}
       - name: Patch api to allow building headlessly
         run: |
-          cd binaryninjaapi
-          git apply --verbose ../binja.patch
+          cd binaryninja-api
+          git apply --verbose ../api.patch
       - name: Configure CMake
         run: cmake --preset ${{env.CONFIGURE_PRESET}} -G Ninja
       - name: Build
