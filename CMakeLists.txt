@@ -11,7 +11,7 @@ if (UI_BUILD)
     if(APPLE)
         set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/clang_64/lib/cmake")
     elseif(MSVC)
-        # bluh
+        set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/msvc2022_64/lib/cmake")
     else()
         set(CMAKE_PREFIX_PATH "$ENV{HOME}/Qt/6.4.3/gcc_64/lib/cmake")
     endif()

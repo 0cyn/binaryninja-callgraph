@@ -14,7 +14,7 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
         version: [ v3.4.4271-stable, dev ]
     steps:
       - uses: actions/checkout@v3
@@ -22,14 +22,21 @@ jobs:
           submodules: 'true'
       - uses: seanmiddleditch/gha-setup-ninja@master
       - uses: ilammy/msvc-dev-cmd@v1
-      - name: optional dependency setup
-        run: |
-          command -v apt-get && sudo apt-get install libgl1-mesa-dev libglvnd-dev || true
+      - name: Basic Dep Setup
+        run:   |
+               if [ "$RUNNER_OS" == "Linux" ]; then
+                    sudo apt-get install libgl1-mesa-dev libglvnd-dev
+                elif [ "$RUNNER_OS" == "Windows" ]; then
+                    choco install wget
+                    choco install devbox-unzip
+               fi
+        shell: bash
       - name: Setup QT
         run: |
-          cd ~
+          cd $HOME
           wget https://github.com/cxnder/qt-artifacts/releases/download/6.4.3/${{matrix.os}}.zip
           unzip ${{matrix.os}}.zip
+        shell: bash
       - name: Update submodule
         run: |
           cd binaryninja-api
