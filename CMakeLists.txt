@@ -58,7 +58,8 @@ set("${CMAKE_C_FLAGS} -include${PROJECT_SOURCE_DIR}/ProjectDefinitions.h")
 
 add_library(${PLUGIN_NAME} SHARED ${_PLUGIN_SOURCE})
 
-target_compile_features(${PLUGIN_NAME} PRIVATE cxx_std_20 c_std_99)
+# target_compile_features(${PLUGIN_NAME} PRIVATE cxx_std_20 c_std_99)
+set(CMAKE_CXX_STANDARD 17)
 target_compile_definitions(${PLUGIN_NAME} PRIVATE DEV_MODE=${DEV_MODE} ${UI_COMPILE_DEFS})
 
 if(APPLE)
