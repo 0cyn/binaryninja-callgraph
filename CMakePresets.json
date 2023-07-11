@@ -9,6 +9,7 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+        "WINDOWS_PREFIX_DIR": "C:/Users/runneradmin/Qt/6.4.3/msvc2022_64/lib/cmake",
         "UI_BUILD": "ON"
       }
     }
