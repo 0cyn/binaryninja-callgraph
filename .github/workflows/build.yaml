@@ -35,7 +35,7 @@ jobs:
         run: |
           cd $HOME
           wget https://github.com/cxnder/qt-artifacts/releases/download/6.4.3/${{matrix.os}}.zip
-          unzip ${{matrix.os}}.zip
+          unzip ${{matrix.os}}.zip -d $HOME
         shell: bash
       - name: Update submodule
         run: |
